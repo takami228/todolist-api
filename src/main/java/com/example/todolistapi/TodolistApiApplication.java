@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class TodolistApiApplication {
 
 	@RequestMapping("/hello")
+	String root() {
+		return "Document Root";
+	}
+
+
+	@RequestMapping("/hello")
 	String hello() {
 		return "Hello World";
 	}
