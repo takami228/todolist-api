@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ItemService {
+public class ItemsService {
     @Autowired
     ItemsRepository repository;
 

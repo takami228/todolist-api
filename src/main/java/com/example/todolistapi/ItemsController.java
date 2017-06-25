@@ -3,25 +3,45 @@ package com.example.todolistapi;
 import com.example.todolistapi.entity.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/items")
 public class ItemsController {
     @Autowired
-    ItemService service;
+    ItemsService service;
 
-    @RequestMapping(method= RequestMethod.GET)
+    @RequestMapping(value="/items", method= RequestMethod.GET)
     public List<Item> itemSelectAll(){
         return service.selectAll();
     }
 
-    @RequestMapping(method= RequestMethod.DELETE)
+    @RequestMapping(value="/items/{id}", method= RequestMethod.GET)
+    public Item selectItemById(@PathVariable("id") int id){
+        return service.findById(id);
+    }
+
+    @RequestMapping(value="/items", method= RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createItem(@RequestBody Item item){
+        service.create(item);
+    }
+
+    @RequestMapping(value="/items/{id}", method= RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteItemById(@PathVariable("id") int id){
+        service.deleteById(id);
+    }
+
+    @RequestMapping(value="/items/{id}", method= RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateItemById(@RequestBody Item item){
+        service.update(item);
+    }
+
+
+    @RequestMapping(value="/items", method= RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void itemDeleteAll(){
         service.deleteAll();
