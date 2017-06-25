@@ -29,8 +29,8 @@ public class ItemService {
     public void update(Item item){
         Item target = repository.findOne(item.getId());
         target.setTitle(item.getTitle());
-        target.setTitle(item.getTitle());
-        target.setTitle(item.getTitle());
+        target.setDescription(item.getDescription());
+        target.setStatus(item.getStatus());
         repository.save(target);
     }
 
